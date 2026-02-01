@@ -1,0 +1,39 @@
+name: BMaps
+version: '1.0.0' # 'BETA' kannst du lassen, '1.0.0' wirkt für Modrinth oft stabiler
+main: bs.bsmap.mapplugin.Main
+api-version: '1.21'
+authors: [ EinfachBen ]
+website: https://modrinth.com/plugin/bmaps # Falls du die Seite schon hast
+description: Native Java & Bedrock city navigation system.
+
+commands:
+  map:
+    description: Das Hauptkommando für das BMaps-System.
+    usage: /map [addcity|removecity|addwarp|removewarp]
+    aliases: [bmaps, bmap, karte]
+
+permissions:
+  bmaps.admin.*:
+    description: Erlaubt den Zugriff auf alle Admin-Funktionen von BMaps.
+    children:
+      bmaps.admin.addcity: true
+      bmaps.admin.removecity: true
+      bmaps.admin.addwarp: true
+      bmaps.admin.removewarp: true
+      bmaps.admin.reload: true # Kleiner Tipp: Ein Reload-Befehl ist immer gut!
+
+  bmaps.admin.addcity:
+    description: Erlaubt das Erstellen einer neuen Stadt.
+    default: op
+
+  bmaps.admin.removecity:
+    description: Erlaubt das Löschen einer Stadt.
+    default: op
+
+  bmaps.admin.addwarp:
+    description: Erlaubt das Setzen eines neuen Warps.
+    default: op
+
+  bmaps.admin.removewarp:
+    description: Erlaubt das Löschen eines Warps.
+    default: op

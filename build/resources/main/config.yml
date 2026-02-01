@@ -1,0 +1,43 @@
+# ==========================================
+#          BMaps - Konfiguration
+# ==========================================
+
+Messages:
+  Prefix: "&8[&bBMaps&8] &7"
+  No-Permission: "&cDazu hast du keine Rechte!"
+  Reload-Success: "&aKonfiguration und Städte erfolgreich neu geladen!"
+  Teleport-Success: "&7Teleportiert zu &b%warp% &7(&f%city%&7)."
+  World-Not-Found: "&cFehler: Die Zielwelt existiert nicht!"
+
+  # Admin-Befehle (Usage)
+  Usage-AddCity: "&cNutze: /map addcity <StadtName>"
+  Usage-AddWarp: "&cNutze: /map addwarp <Stadt> <WarpName>"
+  Usage-Remove: "&cNutze: /map removecity <Stadt> ODER /map removewarp <Stadt> <Warp>"
+
+  # Admin-Befehle (Feedback)
+  City-Created: "&aStadt &e%city% &awurde erfolgreich erstellt."
+  City-Removed: "&cStadt &e%city% &cwurde gelöscht."
+  Warp-Created: "&aWarp &e%warp% &afür Stadt &e%city% &agesetzt."
+  Warp-Removed: "&cWarp &e%warp% &caus Stadt &e%city% &cgelöscht."
+  Update-Success: "&bDaten für &e%target% &baktualisiert (Icon gespeichert)!"
+
+Java-UI:
+  Main:
+    Title: "§0Navigation"
+    City-Button-Material: "BRICKS"
+    City-Button-Name: "§b§lStädte"
+  Cities:
+    Title: "§0Städte Auswahl"
+  Warps:
+    Title: "§0Warps: %city%"
+  Back-Button-Name: "§c« Zurück"
+
+Bedrock-UI:
+  Main-Title: "&0Navigation"
+  Main-Content: "Wähle eine Kategorie aus:"
+  Main-Button-Cities: "Städte"
+  Cities-Title: "&0Städte Auswahl"
+  Cities-Content: "Wähle eine Stadt aus:"
+  Warps-Title: "&0Warps: %city%"
+  Warps-Content: "Wähle einen Punkt in %city%:"
+  Back-Button: "&8« Zurück"
