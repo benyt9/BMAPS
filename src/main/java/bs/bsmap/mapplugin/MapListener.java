@@ -7,11 +7,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerJoinEvent; // Wichtig: Neuer Import
 import org.bukkit.inventory.ItemStack;
 
 public class MapListener implements Listener {
     private final Main plugin;
     public MapListener(Main plugin) { this.plugin = plugin; }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        // Prüft die Permission für den Update-Checker
+        if (player.hasPermission("bmaps.admin.updatechecker")) {
+            // Die ID 12345 musst du später durch deine Modrinth-ID ersetzen
+            new UpdateChecker(plugin, 12345).getVersion(version -> {
+                if (!plugin.getDescription().getVersion().equals(version)) {
+                    player.sendMessage("§8[§bBMaps§8] §aUpdate verfügbar! Version: §e" + version);
+                    player.sendMessage("§aDownload: §dhttps://modrinth.com/plugin/bmaps");
+                }
+            });
+        }
+    }
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
@@ -47,13 +63,30 @@ public class MapListener implements Listener {
         String city = b.getItemMeta().getLore().get(0).replace("§8", "");
         String warp = n.replace("§b§l", "");
         String path = "Städte." + city + ".Warps." + warp;
+
         World w = Bukkit.getWorld(plugin.getCityConfig().getString(path + ".World", "world"));
         if (w != null) {
-            Location loc = new Location(w, plugin.getCityConfig().getDouble(path + ".X"), plugin.getCityConfig().getDouble(path + ".Y"), plugin.getCityConfig().getDouble(path + ".Z"), (float) plugin.getCityConfig().getDouble(path + ".Yaw"), (float) plugin.getCityConfig().getDouble(path + ".Pitch"));
-            p.teleport(loc);
-            p.sendMessage(t("Messages.Prefix") + t("Messages.Teleport-Success").replace("%warp%", warp).replace("%city%", city));
+            Location loc = new Location(w,
+                    plugin.getCityConfig().getDouble(path + ".X"),
+                    plugin.getCityConfig().getDouble(path + ".Y"),
+                    plugin.getCityConfig().getDouble(path + ".Z"),
+                    (float) plugin.getCityConfig().getDouble(path + ".Yaw"),
+                    (float) plugin.getCityConfig().getDouble(path + ".Pitch"));
+
+            // --- FOLIA KOMPATIBILITÄT ---
+            if (plugin.isFolia()) {
+                p.teleportAsync(loc);
+            } else {
+                p.teleport(loc);
+            }
+            // ----------------------------
+
+            p.sendMessage(t("Messages.Prefix") + t("Messages.Teleport-Success")
+                    .replace("%warp%", warp)
+                    .replace("%city%", city));
             p.closeInventory();
         }
     }
+
     private String t(String p) { return plugin.getConfig().getString(p, "").replace("&", "§"); }
-}
+} // Die schließende Klammer hat auch gefehlt

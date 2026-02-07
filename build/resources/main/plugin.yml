@@ -1,10 +1,11 @@
 name: BMaps
-version: '1.0.0' # 'BETA' kannst du lassen, '1.0.0' wirkt für Modrinth oft stabiler
+version: '1.0.3' # 'BETA' kannst du lassen, '1.0.0' wirkt für Modrinth oft stabiler
 main: bs.bsmap.mapplugin.Main
 api-version: '1.21'
 authors: [ EinfachBen ]
 website: https://modrinth.com/plugin/bmaps # Falls du die Seite schon hast
 description: Native Java & Bedrock city navigation system.
+folia-supported: true
 
 commands:
   map:
@@ -36,4 +37,8 @@ permissions:
 
   bmaps.admin.removewarp:
     description: Erlaubt das Löschen eines Warps.
+    default: op
+
+  bmaps.admin.updatechcker:
+    description: Updatechcker permission
     default: op
